@@ -9,7 +9,6 @@ import org.openqa.selenium.Keys;
 import pages.AmazonPage;
 import utilities.ConfigReader;
 import utilities.Driver;
-import utilities.ReusableMethods;
 
 public class amazonStepDefinitions {
     AmazonPage amazonPage=new AmazonPage();
@@ -34,7 +33,6 @@ public class amazonStepDefinitions {
     }
     @Then("sayfayi kapatir")
     public void sayfayi_kapatir() {
-        ReusableMethods.wait(3);
         Driver.closeDriver();
     }
 

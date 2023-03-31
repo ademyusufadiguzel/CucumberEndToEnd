@@ -4,19 +4,21 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
 import java.util.HashMap;
+import java.util.Map;
+
 
 import static io.restassured.RestAssured.given;
 
 public class AuthenticationMedunna {
 
     public static String generateToken(){
-        String url = "https://medunna.com/api/authenticate";
-        HashMap<String, Object> body = new HashMap<>();
-        body.put("username", "batch_yuzuc");
-        body.put("password", "Batch.103");
-        body.put("rememberMe", true);
-        Response response = given().contentType(ContentType.JSON).when().body(body).post(url);
-        return response.jsonPath().getString("id_token");
-    }
 
+        Map<String, Object> bodyMap = new HashMap<>();
+        bodyMap.put("password","Batch.103");
+        bodyMap.put("rememberMe",true);
+        bodyMap.put("username","batch_yuzuc");
+
+        Response response = given().contentType(ContentType.JSON).body(bodyMap).post("https://medunna.com/api/authenticate");
+        return  response.jsonPath().getString("id_token");
+    }
 }

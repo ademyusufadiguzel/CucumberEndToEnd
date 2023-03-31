@@ -4,22 +4,21 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Room {
-
     private String description;
     private Integer price;
     private Integer roomNumber;
     private String roomType;
     private Boolean status;
 
-    @Override
-    public String toString() {
-        return "Room{" +
-                "description='" + description + '\'' +
-                ", price=" + price +
-                ", roomNumber=" + roomNumber +
-                ", roomType='" + roomType + '\'' +
-                ", status=" + status +
-                '}';
+    public Room() {
+    }
+
+    public Room(String description, Integer price, Integer roomNumber, String roomType, Boolean status) {
+        this.description = description;
+        this.price = price;
+        this.roomNumber = roomNumber;
+        this.roomType = roomType;
+        this.status = status;
     }
 
     public String getDescription() {
@@ -62,14 +61,14 @@ public class Room {
         this.status = status;
     }
 
-    public Room(String description, Integer price, Integer roomNumber, String roomType, Boolean status) {
-        this.description = description;
-        this.price = price;
-        this.roomNumber = roomNumber;
-        this.roomType = roomType;
-        this.status = status;
-    }
-
-    public Room() {
+    @Override
+    public String toString() {
+        return "Room{" +
+                "description='" + description + '\'' +
+                ", price=" + price +
+                ", roomNumber=" + roomNumber +
+                ", roomType='" + roomType + '\'' +
+                ", status=" + status +
+                '}';
     }
 }

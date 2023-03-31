@@ -9,8 +9,5 @@
         <module name="CucumberEndToEnd" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="CucumberEndToEndd" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>

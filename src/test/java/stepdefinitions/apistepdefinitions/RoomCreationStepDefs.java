@@ -7,37 +7,38 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.codehaus.jackson.map.ObjectMapper;
 import pojos.Room;
-import utilities.ObjectMapperUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import static base_urls.MedunnaBaseUrl.spec;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
 
-public class RoomCreationStepDefs {
 
+public class RoomCreationStepDefs {
     Response response;
+    int roomNumber = Faker.instance().number().numberBetween(1000, 1000000);
     Room expectedData;
-    int roomNumber = Faker.instance().number().numberBetween(1000,1000000);
+
     @Given("user sends post request for room data")
     public void user_sends_post_request_for_room_data() {
-        spec.pathParams("first","api", "second","rooms");
+        //Set the url
+        spec.pathParams("first", "api", "second", "rooms");
 
-        expectedData = new Room("Basic Room",299,roomNumber,"TWIN",true);
+        //Set the expected data
+        expectedData = new Room("Api'dan yeni oda", 123, roomNumber, "TWIN", true);
 
-        response = given(spec).body(expectedData).post("/{first}/{second}");
+        //Send the request and get the response
+        response = given(spec).body(expectedData).post("{first}/{second}");
         response.prettyPrint();
-
     }
+
     @Then("user gets the room data and assert")
     public void user_gets_the_room_data_and_assert() throws IOException {
-        Room actualData = ObjectMapperUtils.convertJsonToJava(response.asString(), Room.class);
-        System.out.println("actualData = " + actualData);
-
         assertEquals(201, response.statusCode());
 
         //1. Validation
@@ -94,5 +95,4 @@ public class RoomCreationStepDefs {
         assertEquals(expectedData.getDescription(), actualDataGson.getDescription());
 
     }
-
 }
